@@ -28,5 +28,12 @@ def test_02_verificar_inventario(driver):
     driver.find_element("id", "login-button").click()
 
     page_title = driver.title
-    assert page_title == "Swag Labs" , f"ERROR: El titulo de ventana esperado es 'Swag Labs' pero se obtuvo '{page_title}' "
+    section_title = driver.find_element("class name", "title").text
 
+    assert page_title == "Swag Labs" , f"ERROR: El titulo de ventana esperado es 'Swag Labs' pero se obtuvo '{page_title}' "
+   
+    assert section_title == "Products" , f"ERROR: El titulo de sección esperado es 'Products' pero se obtuvo '{section_title}' "
+
+def test_03_productos_visibles(driver):
+    inventory_items = driver.find_elements("class name", "inventory_item")
+    assert len(inventory_items) > 0 , f"ERROR: No se encontraron productos visibles"  
